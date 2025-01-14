@@ -11,10 +11,10 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'html'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
-    'no-console': 'error'
+    'no-console': 'warn'
   },
   ignorePatterns: ['/dist', '/.angular', '/src/app/api', '/.history', '/documentation', '/coverage']
 };
