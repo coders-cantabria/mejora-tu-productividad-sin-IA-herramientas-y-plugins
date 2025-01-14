@@ -1,0 +1,13 @@
+# Build
+/dist
+/.angular
+
+# API autogenerada
+/src/app/api
+
+# VS Code plugins
+/.history
+
+# Tools
+/documentation
+/coverage
