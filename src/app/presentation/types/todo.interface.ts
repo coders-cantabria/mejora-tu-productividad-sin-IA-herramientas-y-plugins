@@ -1,10 +1,10 @@
-export interface NewTodo {
+export interface NewTodoInterface {
   title: string;
   description?: string;
   date: Date;
 }
 
-export interface Todo extends NewTodo {
+export interface TodoInterface extends NewTodoInterface {
   id: string;
   completed: boolean;
 }
