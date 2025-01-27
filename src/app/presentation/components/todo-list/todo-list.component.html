@@ -1,0 +1,11 @@
+<div class="todo-list">
+  @if (!hasTodos()) {
+    <div class="todo-list__empty">
+      <img [src]="'./assets/images/empty.svg'" alt="empty image" /> <span>No se han añadido TODOs</span>
+    </div>
+  } @else {
+    @for (todo of todos(); track todo.id) {
+      <app-todo [todo]="todo"></app-todo>
+    }
+  }
+</div>
