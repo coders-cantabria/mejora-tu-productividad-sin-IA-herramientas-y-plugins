@@ -1,13 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TodoManagerService } from './todo-manager.service';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('TodoManagerService', () => {
   let service: TodoManagerService;
+  let currentLength: number;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [provideAnimations()]
+    });
     service = TestBed.inject(TodoManagerService);
+
+    currentLength = service.todos.length;
   });
 
   it('should be created', () => {
@@ -20,7 +26,7 @@ describe('TodoManagerService', () => {
       date: new Date()
     });
 
-    expect(service.todos.length).toBe(1);
+    expect(service.todos.length).toBe(currentLength + 1);
   });
 
   it('should remove a todo', () => {
@@ -29,13 +35,13 @@ describe('TodoManagerService', () => {
       date: new Date()
     });
 
-    expect(service.todos.length).toBe(1);
+    expect(service.todos.length).toBe(currentLength + 1);
 
     const [todo] = service.todos;
 
     service.removeTodo(todo.id);
 
-    expect(service.todos.length).toBe(0);
+    expect(service.todos.length).toBe(currentLength);
   });
 
   it('should update a todo', () => {
@@ -44,7 +50,7 @@ describe('TodoManagerService', () => {
       date: new Date()
     });
 
-    expect(service.todos.length).toBe(1);
+    expect(service.todos.length).toBe(currentLength + 1);
 
     const [todo] = service.todos;
 

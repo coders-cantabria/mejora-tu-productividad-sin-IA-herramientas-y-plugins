@@ -45,12 +45,12 @@ export class TodoManagerService {
 
   addTodo(newTodo: NewTodoInterface) {
     this.#todos.next([
-      ...this.todos,
       {
         ...newTodo,
         id: uuidv4(),
         completed: false
-      }
+      },
+      ...this.todos
     ]);
   }
 
