@@ -1,0 +1,12 @@
+<div class="todo">
+  <div class="todo__labels">
+    <span class="todo__title">{{ todo().title }}</span>
+    <span class="todo__description">{{ todo().description }}</span>
+    <span class="todo__date">{{ todo().date | date: 'dd/MM/yyyy HH:ss' }}</span>
+  </div>
+  <div class="todo__actions">
+    <button mat-mini-fab aria-label="delete todo icon" (click)="removeTodo()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
