@@ -1,7 +1,13 @@
 <div class="home">
-  <div class="home__list">
-    <app-todo-list></app-todo-list>
-  </div>
+  @if (loading()) {
+    <div class="home__loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    <div class="home__list">
+      <app-todo-list></app-todo-list>
+    </div>
+  }
   <div class="home__form">
     <app-todo-form></app-todo-form>
   </div>

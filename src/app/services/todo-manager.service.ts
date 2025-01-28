@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NewTodoInterface, TodoInterface } from '../presentation/types/todo.interface';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodoManagerService {
   #http = inject(HttpClient);
+
+  loading = signal(true);
 
   #todos = new BehaviorSubject<TodoInterface[]>([]);
   todos$ = this.#todos.asObservable();
@@ -22,10 +24,14 @@ export class TodoManagerService {
   fetchTodos() {
     this.#http.get<TodoInterface[]>('https://api.mockos.io/api/v1/todos').subscribe({
       next: (data) => {
-        this.#todos.next(data); // Emit the result into the BehaviorSubject
+        this.#todos.next(data);
+
+        this.loading.set(false);
       },
       error: (error) => {
         console.error('Error fetching data', error);
+
+        this.loading.set(false);
       }
     });
   }
