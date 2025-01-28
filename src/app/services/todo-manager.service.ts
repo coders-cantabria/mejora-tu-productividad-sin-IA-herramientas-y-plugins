@@ -1,46 +1,33 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NewTodoInterface, TodoInterface } from '../presentation/types/todo.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoManagerService {
-  #todos = new BehaviorSubject<TodoInterface[]>([
-    {
-      id: uuidv4(),
-      title: 'Configurar Angular CLI',
-      description: 'Instalar Angular CLI y crear el proyecto base.',
-      date: new Date(),
-      completed: false
-    },
-    {
-      id: uuidv4(),
-      title: 'Agregar rutas principales',
-      description: 'Configurar el enrutador para navegar entre páginas.',
-      date: new Date(),
-      completed: false
-    },
-    {
-      id: uuidv4(),
-      title: 'Optimizar para producción',
-      description: 'Asegurarse de que la aplicación está optimizada para el despliegue.',
-      date: new Date(),
-      completed: false
-    },
-    {
-      id: uuidv4(),
-      title: 'Configurar Angular CLI',
-      description: 'Instalar Angular CLI y crear el proyecto base.',
-      date: new Date(),
-      completed: false
-    }
-  ]);
+  #http = inject(HttpClient);
+
+  #todos = new BehaviorSubject<TodoInterface[]>([]);
   todos$ = this.#todos.asObservable();
 
   get todos() {
     return this.#todos.getValue();
+  }
+
+  constructor() {}
+
+  fetchTodos() {
+    this.#http.get<TodoInterface[]>('https://api.mockos.io/api/v1/todos').subscribe({
+      next: (data) => {
+        this.#todos.next(data); // Emit the result into the BehaviorSubject
+      },
+      error: (error) => {
+        console.error('Error fetching data', error);
+      }
+    });
   }
 
   addTodo(newTodo: NewTodoInterface) {

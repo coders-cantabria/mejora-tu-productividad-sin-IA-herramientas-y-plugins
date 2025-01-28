@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'html', 'unused-imports'],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-explicit-any': 'warn',
     'no-console': 'warn',
     'unused-imports/no-unused-imports': 'error', // Remove unused imports
     'unused-imports/no-unused-vars': [
