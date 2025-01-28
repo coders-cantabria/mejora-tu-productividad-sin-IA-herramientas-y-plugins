@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TodoManagerService } from './todo-manager.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('TodoManagerService', () => {
   let service: TodoManagerService;
@@ -9,7 +10,7 @@ describe('TodoManagerService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideAnimations()]
+      providers: [provideAnimations(), provideHttpClient()]
     });
     service = TestBed.inject(TodoManagerService);
 
