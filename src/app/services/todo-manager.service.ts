@@ -28,9 +28,7 @@ export class TodoManagerService {
 
         this.loading.set(false);
       },
-      error: (error) => {
-        console.error('Error fetching data', error);
-
+      error: () => {
         this.loading.set(false);
       }
     });
